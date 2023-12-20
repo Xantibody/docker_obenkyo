@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+# front
+
+# backend
+
+  db:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testdb
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d  # 初期データ
+      - ./database/data:/var/lib/postgresql/data     # 永続化
