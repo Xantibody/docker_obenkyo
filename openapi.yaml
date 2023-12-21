@@ -1,0 +1,120 @@
+openapi: 3.1.0
+info:
+  version: '1.0'
+  title: openapi
+  summary: TaskTodo API
+  description: Docker学習用APIの仕様
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /tasks:
+    get:
+      tags:
+        - task
+      summary: タスク一覧取得
+      description: タスクを一覧で取得する
+      operationId: get-tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+              examples:
+                GetTask:
+                  value:
+                    - id: 1
+                      title: TestTitle
+                      summary: TestSummary
+                    - id: 2
+                      title: MyTitle
+                      summary: MySummary
+      servers:
+        - url: 'http://localhost:8080'
+  /task:
+    post:
+      tags:
+        - task
+      summary: タスク作成
+      description: タスクを作成する
+      operationId: post-task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+            examples:
+              CreateTask:
+                value:
+                  title: CreateTestTitle
+                  summary: CreateTestSummary
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              examples:
+                CreateTask:
+                  value:
+                    id: 3
+                    title: CreateTitle
+                    summary: CreateSummary
+      servers:
+        - url: 'http://localhost:8080'
+    delete:
+      tags:
+        - task
+      summary: タスク削除
+      description: すでにタスクを削除する
+      operationId: delete-task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTask'
+            examples:
+              DeleteTask:
+                value:
+                  id: 1
+      responses:
+        '204':
+          description: No Content
+      servers:
+        - url: 'http://localhost:8080'
+tags:
+  - name: task
+components:
+  schemas:
+    Task:
+      type: object
+      title: Task
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        summary:
+          type: string
+      examples:
+        - id: 1
+          title: TestTitle
+          summary: TestSummary
+      x-examples:
+        Example 1:
+          id: 1
+          title: TestTitle
+          summary: TestSummary
+    DeleteTask:
+      type: object
+      title: DeleteTask
+      properties:
+        id:
+          type: integer

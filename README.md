@@ -71,3 +71,14 @@ Dockerで配置済み
 ```sh
 docker compose up
 ``````
+
+
+## API仕様
+`openapi.yaml`を参照すること
+
+#### 開発
+起動
+```sh
+docker compose up
+# localhost:8081
+``````

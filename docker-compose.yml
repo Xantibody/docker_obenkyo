@@ -16,3 +16,12 @@ services:
     volumes:
       - ./database/init:/docker-entrypoint-initdb.d  # 初期データ
       - ./database/data:/var/lib/postgresql/data     # 永続化
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./openapi.yml:/data/openapi.yml
+    environment:
+      SWAGGER_JSON: /data/openapi.yml
