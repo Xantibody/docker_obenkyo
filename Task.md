@@ -88,6 +88,11 @@ FrontendのDockerをproductionビルドしてみる
 BackendのDockerfileをマルチステージビルドにする(No1で行っているなら省略)
 
 ## Extra
-k8sにデプロイできるか挑戦！
+k8sにデプロイする
+
+- サービスはAWSを使用する
 - DB以外をpod化
-- DBはRDSを使用してDB PROXY経由で接続
+- DBはRDSを使用しする
+- 手前にIngress controllerを設定する
+
+![構成図](./doc/images/aws_architecture.drawio.svg)
